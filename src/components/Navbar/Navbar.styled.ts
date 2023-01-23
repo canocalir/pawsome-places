@@ -12,13 +12,14 @@ const Flex = css`
 const NavbarContainer = styled.div`
   ${Flex};
   background-color: ${theme.navBackColor};
-  height: 4rem;
+  height: fit-content;
   align-items: center;
   color: #ffffff;
   justify-content: space-around;
   position: fixed;
   width: 100%;
   opacity: 0.9;
+  padding: 1rem;
 `;
 
 const NavbarButton = styled.button`
