@@ -21,16 +21,21 @@ const LeftContainer = styled.div`
   padding-top: 10rem;
   flex-direction: column;
   align-items: center;
+  gap: 1.5rem;
+  >h1{
+    color: ${theme.mainButtonHoverColor}
+  }
 `;
 
 const RightContainer = styled.div`
   ${DivideHalfScreen};
-  height: 100vh;
 `;
 
 const BackgroundImage = styled.img`
-  max-height: 100vw;
-  height: 100vh;
+ width: 100%;
+ @media (max-width: 1600px) {
+  width: 100vw;
+  }
 `;
 
 export { HomePageContainer, LeftContainer, RightContainer, BackgroundImage };

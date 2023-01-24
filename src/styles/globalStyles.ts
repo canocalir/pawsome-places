@@ -8,6 +8,7 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
     }
     body{
-        background-color: ${theme.mainBackColor}
+        background-color: ${theme.mainBackColor};
+        position: relative;
     }
 `;

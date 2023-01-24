@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar/Navbar";
 import AppRoute from "./routes/AppRoute";
 
 import { GlobalStyles } from "./styles/globalStyles";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <AppRoute />
+        <Footer/>
       </BrowserRouter>
     </>
   );
