@@ -13,7 +13,7 @@ const Navbar = () => {
     <NavbarContainer>
       <NavbarLogoContainer>
         <BrandTextLogoLink to="/">
-          <h1>Pawsome Estates</h1>
+          <h1>Pawsome Places</h1>
         </BrandTextLogoLink>
       </NavbarLogoContainer>
       <NavbarButtonContainer>

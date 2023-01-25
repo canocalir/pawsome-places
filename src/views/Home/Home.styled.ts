@@ -11,17 +11,16 @@ const DivideHalfScreen = css`
 
 const HomePageContainer = styled.div`
   display: flex;
-  height: 100vh;
   flex-wrap: wrap;
 `;
 const LeftContainer = styled.div`
   ${DivideHalfScreen};
   background-color: ${theme.navBackColor};
-  height: 100vh;
   padding-top: 10rem;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+  height: 100vh;
   >h1{
     color: ${theme.mainButtonHoverColor}
   }
@@ -29,13 +28,16 @@ const LeftContainer = styled.div`
 
 const RightContainer = styled.div`
   ${DivideHalfScreen};
+  background-color: ${theme.navBackColor};
+  justify-content: center;
 `;
 
 const BackgroundImage = styled.img`
- width: 100%;
+ height: 100vh;
  @media (max-width: 1600px) {
-  width: 100vw;
+  height: 100%;
+  width: 95vw;
   }
 `;
 
-export { HomePageContainer, LeftContainer, RightContainer, BackgroundImage };
+export { HomePageContainer, LeftContainer, RightContainer, BackgroundImage};
