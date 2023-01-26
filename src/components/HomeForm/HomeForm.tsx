@@ -1,61 +1,11 @@
-import { BiCurrentLocation } from "react-icons/bi";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FormElement } from "./HomeForm.styled";
-import { useState } from "react";
+import { FormElement, LocationButton } from "./HomeForm.styled";
+import useLocation from "../../hooks/useLocation";
 
 type Inputs = {
   location: string;
-  estateType: string;
-  countries: string[];
+  priceTag: string;
 };
-
-const countries = [
-  "AE",
-  "AR",
-  "AS",
-  "AT",
-  "AU",
-  "BE",
-  "BR",
-  "CA",
-  "CH",
-  "CL",
-  "CN",
-  "CO",
-  "DE",
-  "DK",
-  "ES",
-  "FI",
-  "FR",
-  "GB",
-  "GR",
-  "HK",
-  "HU",
-  "ID",
-  "IE",
-  "IN",
-  "IS",
-  "IT",
-  "JP",
-  "KR",
-  "MX",
-  "MY",
-  "NL",
-  "NO",
-  "NZ",
-  "PE",
-  "PH",
-  "PT",
-  "SE",
-  "SG",
-  "TH",
-  "TR",
-  "TW",
-  "US",
-  "VN",
-  "XE",
-  "ZA",
-];
 
 const HomeForm = () => {
   const {
@@ -65,30 +15,33 @@ const HomeForm = () => {
     control,
     formState: { errors, isLoading },
   } = useForm<Inputs>();
-  const [submittedDate, setSubmittedDate] = useState();
-
 
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
+  const { coords, getLocation } = useLocation();
+  console.log(coords);
   return (
     <FormElement onSubmit={handleSubmit(onSubmit)}>
-     
       <input
-        placeholder="Enter desired location"
-        {...register("location", { required: true })}
+        disabled={!!coords.lat}
+        placeholder={!!coords.lat ? "We found your location, please proceed" : "Enter or click button to get your current location"}
+        {...register(
+          "location",
+          coords.lat ? { required: false } : { required: true }
+        )}
       />
-      <BiCurrentLocation size={"1.5rem"} color="green" />
-      <select {...register("estateType", { required: true })}>
-        <option value="Home">Home</option>
-        <option value="Home1">Home1</option>
-        <option value="Home2">Home2</option>
+      {errors.location && <span>You must enter a location</span>}
+
+      <LocationButton onClick={getLocation} size={"1.5rem"} color="green" />
+      <select {...register("priceTag", { required: true })}>
+        <option disabled defaultValue="Price">
+          Price
+        </option>
+        <option value="1">$</option>
+        <option value="2">$$</option>
+        <option value="3">$$$</option>
+        <option value="4">$$$$</option>
       </select>
-      <select {...register("countries", { required: true })}>
-        {countries.map((country) => {
-          return <option key={country}>{country}</option>;
-        })}
-      </select>
-      <input type="submit" />
+      <input type="submit" value="Find Places" />
     </FormElement>
   );
 };
