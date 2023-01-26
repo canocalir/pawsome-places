@@ -7,16 +7,19 @@ import {
 import backgroundURL from '../../assets/amscat.png'
 import HomeForm from "../../components/HomeForm/HomeForm";
 import PlaceCard from "../../components/PlaceCard/PlaceCard";
+import Filter from "../../components/Filter/Filter";
 
 const Home = () => {
+  const controlWidth = false
   return (
     <HomePageContainer>
-      <LeftContainer>
-       <h1>Welcome to Pawsome Places</h1>
+      <LeftContainer full={controlWidth}>
+       <h3>Find Pet Friendly Places Around You</h3>
        <HomeForm/>
-       {[1,2,3,4,5,6,7,8,9,10,11].map((num) => <PlaceCard/>)}
+       <Filter/>
+       <PlaceCard/>
       </LeftContainer>
-      <RightContainer>
+      <RightContainer full={controlWidth}>
         <BackgroundImage src={backgroundURL} alt="" />
       </RightContainer>
     </HomePageContainer>

@@ -5,12 +5,12 @@ const FooterMainContainer = styled.div`
   display: flex;
   position: fixed;
   bottom: 0;
-  background-color: ${theme.mainButtonHoverColor};
+  background-color: ${theme.navBackColor};
   width: 100%;
   height: 3rem;
   justify-content: center;
   align-items: center;
-  color: ${theme.navBackColor};
+  color: ${theme.mainButtonHoverColor};
   font-weight: 600;
 `;
 

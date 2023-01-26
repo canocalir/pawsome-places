@@ -1,5 +1,12 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FormElement, LocationButton } from "./HomeForm.styled";
+import {
+  ErrorMessageContainer,
+  FindPlacesButton,
+  FormElement,
+  InputElementContainer,
+  LocationButton,
+  PriceSelect,
+} from "./HomeForm.styled";
 import useLocation from "../../hooks/useLocation";
 
 type Inputs = {
@@ -21,18 +28,27 @@ const HomeForm = () => {
   console.log(coords);
   return (
     <FormElement onSubmit={handleSubmit(onSubmit)}>
-      <input
-        disabled={!!coords.lat}
-        placeholder={!!coords.lat ? "We found your location, please proceed" : "Enter or click button to get your current location"}
-        {...register(
-          "location",
-          coords.lat ? { required: false } : { required: true }
-        )}
-      />
-      {errors.location && <span>You must enter a location</span>}
+      <InputElementContainer>
+      
+        <input
+          disabled={!!coords.lat}
+          placeholder={
+            !!coords.lat
+              ? "We found your location"
+              : "Enter Location or Click Button"
+          }
+          {...register(
+            "location",
+            coords.lat ? { required: false } : { required: true }
+          )}
+        />
+        <LocationButton onClick={getLocation} />
+        <ErrorMessageContainer>
+          {errors.location && !coords.lat && <span>You must enter a location</span>}
+        </ErrorMessageContainer>
+      </InputElementContainer>
 
-      <LocationButton onClick={getLocation} size={"1.5rem"} color="green" />
-      <select {...register("priceTag", { required: true })}>
+      <PriceSelect {...register("priceTag", { required: true })}>
         <option disabled defaultValue="Price">
           Price
         </option>
@@ -40,8 +56,8 @@ const HomeForm = () => {
         <option value="2">$$</option>
         <option value="3">$$$</option>
         <option value="4">$$$$</option>
-      </select>
-      <input type="submit" value="Find Places" />
+      </PriceSelect>
+      <FindPlacesButton type="submit" value="Find Places" />
     </FormElement>
   );
 };

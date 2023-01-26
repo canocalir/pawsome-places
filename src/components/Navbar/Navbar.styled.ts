@@ -18,8 +18,8 @@ const NavbarContainer = styled.div`
   justify-content: space-around;
   position: fixed;
   width: 100%;
-  opacity: 0.9;
   padding: 1rem;
+  z-index: 99;
 `;
 
 const NavbarButton = styled.button`

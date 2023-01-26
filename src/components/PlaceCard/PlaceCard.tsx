@@ -3,7 +3,7 @@ import { PlaceCardContainer } from "./PlaceCard.styled."
 const PlaceCard = () => {
   return (
     <PlaceCardContainer>
-        Hello
+        PlaceCard
     </PlaceCardContainer>
   )
 }
