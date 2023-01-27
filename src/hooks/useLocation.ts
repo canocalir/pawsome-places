@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "../app/hooks";
+import { setCoordinates } from "../features/placeSlice";
 
 type Location = {
   lat: number;
@@ -12,6 +14,8 @@ const useLocation = () => {
     lon: 0,
     status: "",
   });
+
+  const dispatch = useAppDispatch();
 
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -32,8 +36,10 @@ const useLocation = () => {
     }
     setCoords({ ...coords, status: "Unable to retrieve your location" });
   };
-
-  return {getLocation, coords};
+  useEffect(() => {
+    dispatch(setCoordinates(coords));
+  }, [getLocation]);
+  return { getLocation, coords };
 };
 
 export default useLocation;

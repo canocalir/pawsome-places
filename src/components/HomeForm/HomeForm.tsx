@@ -8,6 +8,8 @@ import {
   PriceSelect,
 } from "./HomeForm.styled";
 import useLocation from "../../hooks/useLocation";
+import { useAppDispatch } from "../../app/hooks";
+import { setLocationString, setPrice } from "../../features/placeSlice";
 
 type Inputs = {
   location: string;
@@ -15,21 +17,29 @@ type Inputs = {
 };
 
 const HomeForm = () => {
+
   const {
     register,
     handleSubmit,
-    watch,
-    control,
-    formState: { errors, isLoading },
+    formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   const { coords, getLocation } = useLocation();
-  console.log(coords);
+
+  const dispatch = useAppDispatch()
+  
+  const onSubmit: SubmitHandler<Inputs> = ({location, priceTag}) => {
+    return(
+      dispatch(setLocationString(location)),
+      dispatch(setPrice(priceTag))
+    )
+  };
+
+  
+
   return (
     <FormElement onSubmit={handleSubmit(onSubmit)}>
       <InputElementContainer>
-      
         <input
           disabled={!!coords.lat}
           placeholder={
@@ -44,7 +54,9 @@ const HomeForm = () => {
         />
         <LocationButton onClick={getLocation} />
         <ErrorMessageContainer>
-          {errors.location && !coords.lat && <span>You must enter a location</span>}
+          {errors.location && !coords.lat && (
+            <span>You must enter a location</span>
+          )}
         </ErrorMessageContainer>
       </InputElementContainer>
 
