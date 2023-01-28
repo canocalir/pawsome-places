@@ -13,10 +13,10 @@ import { setLocationString, setPrice } from "../../features/placeSlice";
 
 type Inputs = {
   location: string;
-  priceTag: string;
+  priceTag: number;
 };
 
-const HomeForm = () => {
+const HomeForm = ({refetch}:any) => {
 
   const {
     register,
@@ -69,7 +69,7 @@ const HomeForm = () => {
         <option value="3">$$$</option>
         <option value="4">$$$$</option>
       </PriceSelect>
-      <FindPlacesButton type="submit" value="Find Places" />
+      <FindPlacesButton onClick={() => refetch()} type="submit" value="Find Places" />
     </FormElement>
   );
 };

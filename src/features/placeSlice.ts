@@ -2,13 +2,17 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface StatesProps {
   locationString: string;
-  price: string;
-  coordinates: {};
+  price: number;
+  coordinates: {
+    lat?: number,
+    lon?: number,
+    status?: string
+  };
 }
 
 const initialState: StatesProps = {
   locationString: "",
-  price: "",
+  price: 1,
   coordinates: {
     lat: 0,
     lon: 0,
@@ -23,7 +27,7 @@ export const placeSlice = createSlice({
     setLocationString: (state, action: PayloadAction<string>) => {
       state.locationString = action.payload;
     },
-    setPrice: (state, action: PayloadAction<string>) => {
+    setPrice: (state, action: PayloadAction<number>) => {
       state.price = action.payload;
     },
     setCoordinates: (state, action: PayloadAction<Object>) => {
