@@ -27,18 +27,20 @@ const Home = () => {
 
   const conditionalURL =  !coordinates ? `https://api.yelp.com/v3/businesses/search?term=pet+friendly&location=${locationString}&price=${price}&sort_by=best_match&limit=20` : `https://api.yelp.com/v3/businesses/search?term=pet+friendly&latitude=${lat}&longitude=${lon}&price=${price}&sort_by=best_match&limit=20`
 
-  const {data, error, isError, isLoading, refetch} = useQuery(['fetchPlaces'], () => fetch(`${import.meta.env.VITE_CORS_URL}${conditionalURL}`, options).then((res) => res.json()), {
+  //FetchData with React Query
+  const {data, error, isError, refetch} = useQuery(['fetchPlaces'], () => fetch(`${import.meta.env.VITE_CORS_URL}${conditionalURL}`, options).then((res) => res.json()), {
     enabled: false
   })
-  console.log(data)
 
   return (
     <HomePageContainer>
       <LeftContainer full={controlWidth}>
         <h3>Find Pet Friendly Places Around You</h3>
         <HomeForm refetch={refetch}/>
-        <Filter />
-        <PlaceCard />
+        {data && <Filter />}
+        {data?.businesses?.map((place:any) => {
+          return <PlaceCard key={place?.id}/>
+        })}
       </LeftContainer>
       <RightContainer full={controlWidth}>
         <BackgroundImage src={backgroundURL} alt="" />

@@ -19,6 +19,7 @@ const FormElement = styled.form`
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     gap:1rem;
     flex-wrap:wrap;
+    margin: auto;
     border: none;
     @media(max-width: 864px){
         width: 100%;

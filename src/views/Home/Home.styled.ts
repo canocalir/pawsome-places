@@ -11,6 +11,8 @@ const DivideHalfScreen = css`
 const HomePageContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  height: 100vh;
+  padding-top: 4.5rem;
 `;
 
 interface LeftProps {
@@ -21,16 +23,20 @@ const LeftContainer = styled.div<LeftProps>`
   ${props => !props.full && DivideHalfScreen};
   width: ${(props) => (props.full && "100%")};
   background-color: #3f4e31;
-  padding-top: 10rem;
   flex-direction: column;
   display: flex;
   align-items: center;
+  padding: 2rem 2rem 4rem 0rem;
+  overflow: auto;
   gap: 1.5rem;
-  height: 100vh;
   > h3 {
     color: ${theme.mainButtonHoverColor};
-    padding: 0 1rem 0 1rem;
+    padding: 1rem 1rem 0 1rem;
     text-align: center;
+  }
+  @media(max-width: 864px){
+    overflow: visible;
+    padding:0;
   }
 `;
 
@@ -43,14 +49,15 @@ const RightContainer = styled.div<RightProps>`
   display: ${(props) => props.full ? "none" : "flex"};
   background-color: ${theme.navBackColor};
   justify-content: center;
+  position: fixed;
+  right: 0;
+  @media (max-width: 1600px) {
+    display: none;
+  }
 `;
 
 const BackgroundImage = styled.img`
   height: 100vh;
-  @media (max-width: 1600px) {
-    height: 100%;
-    width: 95vw;
-  }
 `;
 
 export { HomePageContainer, LeftContainer, RightContainer, BackgroundImage };
