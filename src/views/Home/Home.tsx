@@ -35,7 +35,7 @@ const Home = () => {
   return (
     <HomePageContainer>
       <LeftContainer full={controlWidth}>
-        <h3>Find Pet Friendly Places Around You</h3>
+        {data && <h3>Pet Friendly Places Around {locationString.toUpperCase() || "Your Current Location"}</h3>}
         <HomeForm refetch={refetch}/>
         {data && <Filter />}
         {data?.businesses?.map((place:any) => {
