@@ -25,21 +25,23 @@ const Home = () => {
     }
   };
 
-  const conditionalURL =  !coordinates ? `https://api.yelp.com/v3/businesses/search?term=pet+friendly&location=${locationString}&price=${price}&sort_by=best_match&limit=20` : `https://api.yelp.com/v3/businesses/search?term=pet+friendly&latitude=${lat}&longitude=${lon}&price=${price}&sort_by=best_match&limit=20`
-
+  const conditionalURL =  !coordinates.lat && !coordinates.lon ? `${import.meta.env.VITE_BASE_URL}businesses/search?location=${locationString}&term=pet%20friendly&price=${price}&sort_by=best_match&limit=20` : `${import.meta.env.VITE_BASE_URL}businesses/search?term=pet%20friendly&latitude=${lat}&longitude=${lon}&price=${price}&sort_by=best_match&limit=20`
+console.log(conditionalURL)
   //FetchData with React Query
   const {data, error, isError, refetch} = useQuery(['fetchPlaces'], () => fetch(`${import.meta.env.VITE_CORS_URL}${conditionalURL}`, options).then((res) => res.json()), {
     enabled: false
   })
-
+  
+console.log(data)
   return (
     <HomePageContainer>
       <LeftContainer full={controlWidth}>
         {data && <h3>Pet Friendly Places Around {locationString.toUpperCase() || "Your Current Location"}</h3>}
         <HomeForm refetch={refetch}/>
-        {data && <Filter />}
+        {error && <Filter />}
         {data?.businesses?.map((place:any) => {
-          return <PlaceCard key={place?.id}/>
+          const {id, image_url, name, rating, phone} = place
+          return <PlaceCard placeId={id} placePhone={phone} placeRating={rating} placeName={name} placeImage={image_url} key={id}/>
         })}
       </LeftContainer>
       <RightContainer full={controlWidth}>

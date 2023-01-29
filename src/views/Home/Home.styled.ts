@@ -58,6 +58,7 @@ const RightContainer = styled.div<RightProps>`
 
 const BackgroundImage = styled.img`
   height: 100vh;
+  width: 50vw;
 `;
 
 export { HomePageContainer, LeftContainer, RightContainer, BackgroundImage };

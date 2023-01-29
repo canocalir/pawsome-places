@@ -31,11 +31,10 @@ const HomeForm = ({refetch}:any) => {
   const onSubmit: SubmitHandler<Inputs> = ({location, priceTag}) => {
     return(
       dispatch(setLocationString(location)),
-      dispatch(setPrice(priceTag))
+      dispatch(setPrice(priceTag)),
+      setTimeout(() => {refetch()}, 1000)
     )
   };
-
-  
 
   return (
     <FormElement onSubmit={handleSubmit(onSubmit)}>
@@ -69,7 +68,7 @@ const HomeForm = ({refetch}:any) => {
         <option value="3">$$$</option>
         <option value="4">$$$$</option>
       </PriceSelect>
-      <FindPlacesButton onClick={() => refetch()} type="submit" value="Find Places" />
+      <FindPlacesButton type="submit" value="Find Places" />
     </FormElement>
   );
 };
