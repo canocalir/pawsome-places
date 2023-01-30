@@ -5,10 +5,19 @@ import {
   NavbarButton,
   NavbarButtonContainer,
   NavbarContainer,
+  NavbarExpandableMenu,
   NavbarLogoContainer,
 } from "./Navbar.styled";
+import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
+import { auth } from "../../services/firebaseConfig";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const [user, loading, error] = useAuthState(auth);
+  const [signOut] = useSignOut(auth);
+
   return (
     <NavbarContainer>
       <NavbarLogoContainer>
@@ -18,13 +27,32 @@ const Navbar = () => {
       </NavbarLogoContainer>
       <NavbarButtonContainer>
         <NavLink to="/login">
-          <NavbarButton>Login</NavbarButton>
+          {!user && <NavbarButton>Login</NavbarButton>}
         </NavLink>
         <NavLink to="/register">
-          <NavbarButton>Register</NavbarButton>
+          {!user && <NavbarButton>Register</NavbarButton>}
         </NavLink>
-
-        <NavbarAvatar />
+        <p>{user?.displayName}</p>
+        <NavbarAvatar
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          imageUrl={user?.photoURL}
+        >
+          {isMenuOpen && (
+            <NavbarExpandableMenu>
+              <p>{user?.email}</p>
+              <button
+                onClick={async () => {
+                  const success = (await signOut()) && setIsMenuOpen(false);
+                  if (success) {
+                    alert("You are signed out");
+                  }
+                }}
+              >
+                Sign out
+              </button>
+            </NavbarExpandableMenu>
+          )}
+        </NavbarAvatar>
       </NavbarButtonContainer>
     </NavbarContainer>
   );

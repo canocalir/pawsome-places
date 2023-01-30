@@ -65,7 +65,7 @@ const PlaceCard = ({
         <h2>{placeRating}</h2>
         <PlaceImage src={placeImage} />
         <p>{placePhone}</p>
-        <button onClick={fetchReviewsData}>Reviews</button>
+        <button id={placeId} onClick={fetchReviewsData}>Reviews</button>
       </PlaceInnerContainer>
       <ReviewContainer>
         {isOpen &&

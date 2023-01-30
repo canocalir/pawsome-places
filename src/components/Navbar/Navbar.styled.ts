@@ -1,12 +1,7 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { theme } from "../../styles/theme";
 import { NavLink } from "react-router-dom";
-
-//Mixins
-const Flex = css`
-  display: flex;
-  flex-wrap: wrap;
-`;
+import { Flex, MainHeading } from "../../styles/globalStyles";
 
 //Components
 const NavbarContainer = styled.div`
@@ -39,17 +34,26 @@ const NavbarButton = styled.button`
   }
 `;
 
-const NavbarAvatar = styled.div`
+type AvatarProps = {
+  imageUrl?: string | null;
+};
+
+const NavbarAvatar = styled.div<AvatarProps>`
+  position: relative;
   border-radius: 50%;
   width: 2.5rem;
   height: 2.5rem;
   border: 2px solid #ffffff;
   background-color: ${theme.mainButtonHoverColor};
+  background-image: url(${(props) => props.imageUrl});
+  background-size: cover;
+  display: ${(props) => !props.imageUrl && "none"};
 `;
 
 const NavbarButtonContainer = styled.div`
   ${Flex};
   gap: 1rem;
+  align-items:center;
 `;
 
 const NavbarLogoContainer = styled.div`
@@ -59,9 +63,36 @@ const NavbarLogoContainer = styled.div`
 const BrandTextLogoLink = styled(NavLink)`
   text-decoration: none;
   > h1 {
-    font-family: "Bebas Neue", cursive;
-    letter-spacing: 0.3rem;
-    color: ${theme.mainButtonHoverColor};
+    ${MainHeading}
+  }
+`;
+
+const NavbarExpandableMenu = styled.div`
+  ${Flex};
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  right: 0rem;
+  top: 3rem;
+  background-color: #ffffff;
+  color: #000000;
+  height: 10rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  font-weight: 600;
+  >button{
+    width: 100%;
+    height: 2rem;
+    border:none;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 0.4rem;
+    background-color: ${theme.mainButtonColor};
+    &:hover{
+      background-color: ${theme.mainButtonHoverColor};
+      cursor: pointer;
+      transition: 300ms ease-in;
+    }
   }
 `;
 
@@ -72,4 +103,5 @@ export {
   NavbarLogoContainer,
   NavbarAvatar,
   BrandTextLogoLink,
+  NavbarExpandableMenu,
 };
