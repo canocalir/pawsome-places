@@ -21,9 +21,6 @@ const FormElement = styled.form`
     flex-wrap:wrap;
     margin: auto;
     border: none;
-    @media(max-width: 864px){
-        width: 100%;
-    }
 `
 
 const InputElementContainer = styled.div`

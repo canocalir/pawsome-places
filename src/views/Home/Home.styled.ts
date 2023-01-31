@@ -28,6 +28,7 @@ const LeftContainer = styled.div<LeftProps>`
   align-items: center;
   padding: 2rem 2rem 4rem 0rem;
   overflow: auto;
+  flex-wrap: wrap;
   gap: 1.5rem;
   > h3 {
     color: ${theme.mainButtonHoverColor};
@@ -35,7 +36,7 @@ const LeftContainer = styled.div<LeftProps>`
     text-align: center;
   }
   @media(max-width: 864px){
-    overflow: visible;
+    width: 100%;
     padding:0;
   }
 `;

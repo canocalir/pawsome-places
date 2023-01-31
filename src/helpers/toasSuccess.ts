@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
-export const registerError = () => {
-    toast.error("User already registered", {
+export const signedOutSuccess = () => {
+    toast.success("Successfully Signed Out", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -13,8 +13,8 @@ export const registerError = () => {
         });
 };
 
-export const loginError = () => {
-    toast.error("Wrong user or password", {
+export const loggedInSuccess = () => {
+    toast.success("Successfully Signed Out", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

@@ -21,6 +21,5 @@ export const GlobalStyles = createGlobalStyle`
     body{
         background-color: ${theme.mainBackColor};
         position: relative;
-        height: 100vh;
     }
 `;

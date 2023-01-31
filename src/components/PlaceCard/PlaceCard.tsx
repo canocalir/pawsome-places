@@ -61,9 +61,9 @@ const PlaceCard = ({
   return (
     <PlaceCardContainer>
       <PlaceInnerContainer>
+      <PlaceImage src={placeImage} />
         <h1>{placeName}</h1>
         <h2>{placeRating}</h2>
-        <PlaceImage src={placeImage} />
         <p>{placePhone}</p>
         <button id={placeId} onClick={fetchReviewsData}>Reviews</button>
       </PlaceInnerContainer>

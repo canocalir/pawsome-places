@@ -11,12 +11,19 @@ import {
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { auth } from "../../services/firebaseConfig";
 import { useState } from "react";
+import { signedOutSuccess } from "../../helpers/toasSuccess";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const [user, loading, error] = useAuthState(auth);
   const [signOut] = useSignOut(auth);
+
+  const signOutHandler = () => {
+    signOut();
+    setIsMenuOpen(false);
+    signedOutSuccess()
+  };
 
   return (
     <NavbarContainer>
@@ -41,16 +48,7 @@ const Navbar = () => {
           {isMenuOpen && (
             <NavbarExpandableMenu>
               <p>{user?.email}</p>
-              <button
-                onClick={async () => {
-                  const success = (await signOut()) && setIsMenuOpen(false);
-                  if (success) {
-                    alert("You are signed out");
-                  }
-                }}
-              >
-                Sign out
-              </button>
+              <button onClick={signOutHandler}>Sign out</button>
             </NavbarExpandableMenu>
           )}
         </NavbarAvatar>

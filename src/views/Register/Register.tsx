@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuthState, useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../../services/firebaseConfig";
 import { registerError } from "../../helpers/toastError";
-import { useEffect } from "react";
 
 const Register = () => {
   const [user] = useAuthState(auth);
@@ -20,12 +19,14 @@ const Register = () => {
   const [createUserWithEmailAndPassword, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
-  const onSubmit = (data: any) => {
-      createUserWithEmailAndPassword(data.email, data.password);
+  const onSubmit = async (data: any) => {
+      await createUserWithEmailAndPassword(data.email, data.password)
+      && navigate("/dashboard");
+      if (!user) registerError();
     };
 
   if (loading) return <div>Loading...</div>;
-
+  
   return (
     <RegisterPageContainer>
       <h1>Register</h1>
