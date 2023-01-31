@@ -21,11 +21,15 @@ const Login = () => {
     useSignInWithEmailAndPassword(auth);
 
   const onSubmit = (data: any) => {
-    signInWithEmailAndPassword(data.email, data.password);
+    signInWithEmailAndPassword(data.email, data.password) 
+    user && navigate('/')
   };
 
+  const googleSignInHandler = async () => {
+    await signInWithGoogle() && navigate("/")
+  }
+
   if(loading) return <div>Loading...</div>
-  user && navigate('/')
 
   const [signInWithGoogle] = useSignInWithGoogle(auth);
 
@@ -41,9 +45,9 @@ const Login = () => {
           {...register("password",{required:true})}
         />
         {errors.email && <span>Password is required</span>}
-        <input type="submit" />
+        <input type="submit" value="Login"/>
       </LoginForm>
-      <LoginButtonGoogle onClick={() => signInWithGoogle()}><FcGoogle size={"2rem"}/>Sign In with Google</LoginButtonGoogle>
+      <LoginButtonGoogle onClick={googleSignInHandler}><FcGoogle size={"2rem"}/>Sign In with Google</LoginButtonGoogle>
     </LoginPageContainer>
   );
 };

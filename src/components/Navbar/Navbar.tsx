@@ -36,6 +36,7 @@ const Navbar = () => {
         <NavbarAvatar
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           imageUrl={user?.photoURL}
+          user={user}
         >
           {isMenuOpen && (
             <NavbarExpandableMenu>

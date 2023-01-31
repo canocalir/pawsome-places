@@ -36,6 +36,7 @@ const NavbarButton = styled.button`
 
 type AvatarProps = {
   imageUrl?: string | null;
+  user: unknown
 };
 
 const NavbarAvatar = styled.div<AvatarProps>`
@@ -47,7 +48,7 @@ const NavbarAvatar = styled.div<AvatarProps>`
   background-color: ${theme.mainButtonHoverColor};
   background-image: url(${(props) => props.imageUrl});
   background-size: cover;
-  display: ${(props) => !props.imageUrl && "none"};
+  display: ${(props) => props.user ? props.imageUrl : "none"};
 `;
 
 const NavbarButtonContainer = styled.div`

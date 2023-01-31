@@ -47,8 +47,7 @@ const Home = () => {
       enabled: false,
     }
   );
-
-  console.log(data);
+  
   return (
     <HomePageContainer>
       <LeftContainer full={controlWidth}>

@@ -6,12 +6,12 @@ import Settings from "../views/Settings/Settings";
 
 const AppRoute = () => {
   return (
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/settings" element={<Settings />} />
-      </Routes>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/settings" element={<Settings />} />
+    </Routes>
   );
 };
 
