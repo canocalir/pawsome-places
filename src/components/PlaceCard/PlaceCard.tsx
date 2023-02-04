@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   PlaceCardContainer,
   PlaceImage,
   PlaceInnerContainer,
   ReviewContainer,
   ReviewRating,
+  ReviewsButton,
   SingleReviewList,
 } from "./PlaceCard.styled.";
-import { useQuery } from "@tanstack/react-query";
 
 type PlaceCardProps = {
   placeImage: string;
@@ -25,6 +25,7 @@ const PlaceCard = ({
   placeId,
 }: PlaceCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [data, setData] = useState<[]>();
 
   const options = {
     method: "GET",
@@ -34,42 +35,33 @@ const PlaceCard = ({
     },
   };
 
-  const { data, error, isError, isLoading, refetch } = useQuery(
-    ["fetchReview"],
-    () =>
-      fetch(
-        `${import.meta.env.VITE_CORS_URL}${
-          import.meta.env.VITE_BASE_URL
-        }businesses/${placeId}/reviews`,
-        options
-      ).then((res) => res.json()),
-    {
-      enabled: false,
-    }
-  );
-  
-  console.log(data)
+  const fetchReviewsData = async () => {
+    const res = await fetch(
+      `${import.meta.env.VITE_CORS_URL}${
+        import.meta.env.VITE_BASE_URL
+      }businesses/${placeId}/reviews`,
+      options
+    );
 
-  const fetchReviewsData = () => {
+    const data = await res.json();
     setIsOpen(!isOpen);
+    setData(data?.reviews);
   };
-
-  useEffect(() => {
-    refetch()
-  },[isOpen, refetch])
+  console.log(placeId);
+  console.log(data);
 
   return (
     <PlaceCardContainer>
       <PlaceInnerContainer>
-      <PlaceImage src={placeImage} />
+        <PlaceImage src={placeImage} />
         <h1>{placeName}</h1>
         <h2>{placeRating}</h2>
         <p>{placePhone}</p>
-        <button id={placeId} onClick={fetchReviewsData}>Reviews</button>
+        <ReviewsButton id={placeId} onClick={fetchReviewsData} />
       </PlaceInnerContainer>
       <ReviewContainer>
         {isOpen &&
-          data?.reviews?.map((review: any) => {
+          data?.map((review: any) => {
             return (
               <SingleReviewList id={review?.id} key={review?.id}>
                 <ReviewRating>{review?.rating}</ReviewRating>
@@ -77,6 +69,7 @@ const PlaceCard = ({
               </SingleReviewList>
             );
           })}
+        {isOpen && data?.length === 0 && "No reviews"}
       </ReviewContainer>
     </PlaceCardContainer>
   );

@@ -6,6 +6,7 @@ import { auth } from "../../services/firebaseConfig";
 import { registerError } from "../../helpers/toastError";
 
 const Register = () => {
+  
   const [user] = useAuthState(auth);
 
   const {

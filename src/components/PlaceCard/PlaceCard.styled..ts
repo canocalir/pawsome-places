@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {MdReviews} from "react-icons/md"
 
 const PlaceCardContainer = styled.div`
   display: flex;
@@ -59,6 +60,12 @@ const SingleReviewList = styled.li`
   display: flex;
 `;
 
+const ReviewsButton = styled(MdReviews)`
+  font-size: 1.5rem;
+  color: green;
+  cursor: pointer;
+`
+
 export {
   PlaceCardContainer,
   PlaceImage,
@@ -66,4 +73,5 @@ export {
   PlaceInnerContainer,
   ReviewRating,
   SingleReviewList,
+  ReviewsButton
 };
