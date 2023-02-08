@@ -1,6 +1,8 @@
 import { useState } from "react";
 import {
   PlaceCardContainer,
+  PlaceDetailsContainer,
+  PlaceDetailsInnerContainer,
   PlaceImage,
   PlaceInnerContainer,
   ReviewContainer,
@@ -51,27 +53,34 @@ const PlaceCard = ({
   console.log(data);
 
   return (
+    <>
     <PlaceCardContainer>
       <PlaceInnerContainer>
         <PlaceImage src={placeImage} />
+        <PlaceDetailsContainer>
         <h1>{placeName}</h1>
+        <PlaceDetailsInnerContainer>
         <h2>{placeRating}</h2>
         <p>{placePhone}</p>
+        </PlaceDetailsInnerContainer>
         <ReviewsButton id={placeId} onClick={fetchReviewsData} />
+        </PlaceDetailsContainer>
+        
       </PlaceInnerContainer>
-      <ReviewContainer>
-        {isOpen &&
-          data?.map((review: any) => {
-            return (
-              <SingleReviewList id={review?.id} key={review?.id}>
-                <ReviewRating>{review?.rating}</ReviewRating>
-                {review?.id !== placeId && review?.text}
-              </SingleReviewList>
-            );
-          })}
-        {isOpen && data?.length === 0 && "No reviews"}
-      </ReviewContainer>
     </PlaceCardContainer>
+    <ReviewContainer isOpen={isOpen}>
+    {isOpen &&
+      data?.map((review: any) => {
+        return (
+          <SingleReviewList id={review?.id} key={review?.id}>
+            <ReviewRating>{review?.rating}</ReviewRating>
+            {review?.id !== placeId && review?.text}
+          </SingleReviewList>
+        );
+      })}
+    {isOpen && data?.length === 0 && "No reviews"}
+  </ReviewContainer>
+  </>
   );
 };
 

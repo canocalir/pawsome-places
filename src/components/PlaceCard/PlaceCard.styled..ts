@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {MdReviews} from "react-icons/md"
+import { theme } from "../../styles/theme";
 
 const PlaceCardContainer = styled.div`
   display: flex;
@@ -10,11 +11,30 @@ const PlaceCardContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
   padding: 1rem;
+  border: 4px solid ${theme.mainButtonHoverColor};
   @media (max-width: 864px) {
     flex-wrap: wrap;
   }
 `;
+
+const PlaceDetailsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  >h1{
+  }
+  
+`
+
+const PlaceDetailsInnerContainer = styled.div`
+  display: flex;
+  >h2{
+    position:absolute;
+    top:0.5rem;
+    right: 0.5rem;
+  }
+`
 
 const PlaceImage = styled.img`
   width: 250px;
@@ -23,10 +43,16 @@ const PlaceImage = styled.img`
   border-radius: 1rem;
 `;
 
-const ReviewContainer = styled.div`
-  display: flex;
+type ReviewContainerProps = {
+  isOpen: boolean
+}
+
+const ReviewContainer = styled.div<ReviewContainerProps>`
+  display: ${props => !props.isOpen ? "none" : "flex"};
   justify-content: center;
   flex-direction: column;
+  background-color: #ffffff;
+  padding: 1rem;
 `;
 
 const PlaceInnerContainer = styled.div`
@@ -36,13 +62,6 @@ const PlaceInnerContainer = styled.div`
   gap: 2rem;
   @media (max-width: 864px) {
     flex-wrap: wrap;
-  }
-  >h1{
-    font-size: 1.2rem;
-    width: 5rem;
-  }
-  >h2{
-    width: 2rem;
   }
 `;
 
@@ -64,6 +83,9 @@ const ReviewsButton = styled(MdReviews)`
   font-size: 1.5rem;
   color: green;
   cursor: pointer;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
 `
 
 export {
@@ -73,5 +95,7 @@ export {
   PlaceInnerContainer,
   ReviewRating,
   SingleReviewList,
-  ReviewsButton
+  ReviewsButton,
+  PlaceDetailsContainer,
+  PlaceDetailsInnerContainer
 };
